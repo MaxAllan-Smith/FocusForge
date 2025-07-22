@@ -1,24 +1,33 @@
-﻿namespace FocusForge.Tests.UnitTests.Domain
+﻿using FocusForge.Domain.Entities;
+
+namespace FocusForge.Tests.UnitTests.Domain
 {
+    [TestFixture]
     public class TaskItemTests
     {
         [Test]
         public void CanCreateAndCompleteTask()
         {
-            var task = new TaskItem("Write test plan");
+            // Arrange
+            TaskItem task = new("Write test plan");
 
-            Assert.AreEqual("Write test plan", task.Title);
-            Assert.IsFalse(task.IsCompleted);
+            // Assert initial state
+            Assert.That(task.Title, Is.EqualTo("Write test plan"));
+            Assert.That(task.IsCompleted, Is.False);
 
+            // Act
             task.MarkComplete();
 
-            Assert.IsTrue(task.IsCompleted);
+            // Assert final state
+            Assert.That(task.IsCompleted, Is.True);
         }
 
         [Test]
         public void ThrowsIfTitleIsEmpty()
         {
-            Assert.Throws<ArgumentException>(() => new TaskItem(""));
+            // Act & Assert
+            ArgumentException? ex = Assert.Throws<ArgumentException>(() => new TaskItem(""));
+            Assert.That(ex.Message, Does.Contain("Title"));
         }
     }
 }
