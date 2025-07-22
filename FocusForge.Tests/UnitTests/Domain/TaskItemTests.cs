@@ -29,5 +29,24 @@ namespace FocusForge.Tests.UnitTests.Domain
             ArgumentException? ex = Assert.Throws<ArgumentException>(() => new TaskItem(""));
             Assert.That(ex.Message, Does.Contain("Title"));
         }
+
+        [Test]
+        public void CanUpdateTitle()
+        {
+            TaskItem task = new TaskItem("Initial title");
+
+            task.UpdateTitle("Updated title");
+
+            Assert.That(task.Title, Is.EqualTo("Updated title"));
+        }
+
+        [Test]
+        public void ThrowsIfUpdatedTitleIsInvalid()
+        {
+            TaskItem task = new TaskItem("Original");
+
+            ArgumentException? ex = Assert.Throws<ArgumentException>(() => task.UpdateTitle("  "));
+            Assert.That(ex.Message, Does.Contain("Title"));
+        }
     }
 }
