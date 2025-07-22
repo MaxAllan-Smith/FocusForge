@@ -6,6 +6,13 @@ namespace FocusForge.Tests.UnitTests.Domain
     public class TaskItemTests
     {
         [Test]
+        public void TaskHasUniqueId()
+        {
+            TaskItem task = new TaskItem("Test ID");
+            Assert.That(task.Id, Is.Not.EqualTo(Guid.Empty));
+        }
+
+        [Test]
         public void CanCreateAndCompleteTask()
         {
             // Arrange

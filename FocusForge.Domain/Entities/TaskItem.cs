@@ -2,6 +2,7 @@
 {
     public class TaskItem
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public string Title { get; private set; }
         public bool IsCompleted { get; private set; }
 
