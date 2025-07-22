@@ -33,7 +33,7 @@ namespace FocusForge.Tests.UnitTests.Domain
         [Test]
         public void CanUpdateTitle()
         {
-            TaskItem task = new TaskItem("Initial title");
+            TaskItem task = new("Initial title");
 
             task.UpdateTitle("Updated title");
 
@@ -43,7 +43,7 @@ namespace FocusForge.Tests.UnitTests.Domain
         [Test]
         public void ThrowsIfUpdatedTitleIsInvalid()
         {
-            TaskItem task = new TaskItem("Original");
+            TaskItem task = new("Original");
 
             ArgumentException? ex = Assert.Throws<ArgumentException>(() => task.UpdateTitle("  "));
             Assert.That(ex.Message, Does.Contain("Title"));
