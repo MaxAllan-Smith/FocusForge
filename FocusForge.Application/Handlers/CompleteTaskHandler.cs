@@ -7,9 +7,9 @@ namespace FocusForge.Application.Handlers
     {
         public Task Handle(CompleteTaskCommand command)
         {
-            if (!store.TryGetValue(command.Id, out TaskItem? task))
+            if (!store.TryGetValue(command.TaskId, out TaskItem? task))
             {
-                throw new KeyNotFoundException($"Task with ID {command.Id} not found.");
+                throw new KeyNotFoundException($"Task with ID {command.TaskId} not found.");
             }
 
             task.MarkComplete();

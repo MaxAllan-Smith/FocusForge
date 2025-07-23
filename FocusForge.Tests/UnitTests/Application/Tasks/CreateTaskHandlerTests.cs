@@ -18,7 +18,7 @@ namespace FocusForge.Tests.UnitTests.Application.Tasks
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Title, Is.EqualTo("Focus on unit tests"));
             Assert.That(result.IsCompleted, Is.False);
-            Assert.That(result.Id, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(result.TaskId, Is.Not.EqualTo(Guid.Empty));
         }
     }
 }

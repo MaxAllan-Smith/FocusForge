@@ -9,7 +9,7 @@ namespace FocusForge.Tests.UnitTests.Domain
         public void TaskHasUniqueId()
         {
             TaskItem task = new TaskItem("Test ID");
-            Assert.That(task.Id, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(task.TaskId, Is.Not.EqualTo(Guid.Empty));
         }
 
         [Test]

@@ -14,11 +14,11 @@ namespace FocusForge.Tests.UnitTests.Application.Tasks
             TaskItem task = new("Write more tests");
             Dictionary<Guid, TaskItem> store = new()
             {
-                { task.Id, task }
+                { task.TaskId, task }
             };
 
             CompleteTaskHandler handler = new(store);
-            CompleteTaskCommand command = new(task.Id);
+            CompleteTaskCommand command = new(task.TaskId);
 
             // Act
             await handler.Handle(command);

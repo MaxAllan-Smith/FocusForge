@@ -2,6 +2,6 @@
 {
     public class CompleteTaskCommand(Guid id)
     {
-        public Guid Id { get; } = id;
+        public Guid TaskId { get; } = id;
     }
 }
