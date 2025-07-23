@@ -1,4 +1,5 @@
 using FocusForge.Application;
+using FocusForge.Application.Commands;
 using FocusForge.Infrastructure;
 using FocusForge.WebApi;
 
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .AddApplication()
+    .AddApplication(typeof(CreateTaskCommand).Assembly)
     .AddInfrastructure()
     .AddWebApi();
 

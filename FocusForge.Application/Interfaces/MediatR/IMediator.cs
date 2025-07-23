@@ -1,0 +1,7 @@
+﻿namespace FocusForge.Application.Interfaces.MediatR
+{
+    public interface IMediator
+    {
+        Task<TResponse> Send<TResponse>(IRequest<TResponse> request);
+    }
+}
