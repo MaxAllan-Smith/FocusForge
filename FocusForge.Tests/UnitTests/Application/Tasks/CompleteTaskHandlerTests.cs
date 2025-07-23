@@ -1,11 +1,6 @@
 ﻿using FocusForge.Application.Commands;
 using FocusForge.Application.Handlers;
 using FocusForge.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FocusForge.Tests.UnitTests.Application.Tasks
 {
