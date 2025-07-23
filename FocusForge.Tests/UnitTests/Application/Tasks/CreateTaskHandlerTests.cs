@@ -1,9 +1,6 @@
-﻿using FocusForge.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FocusForge.Application.Commands;
+using FocusForge.Application.Handlers;
+using FocusForge.Domain.Entities;
 
 namespace FocusForge.Tests.UnitTests.Application.Tasks
 {
@@ -13,9 +10,9 @@ namespace FocusForge.Tests.UnitTests.Application.Tasks
         [Test]
         public async Task CanCreateTask()
         {
-            var handler = new CreateTaskHandler();
+            CreateTaskHandler handler = new();
 
-            var command = new CreateTaskCommand("Focus on unit tests");
+            CreateTaskCommand command = new("Focus on unit tests");
             TaskItem result = await handler.Handle(command);
 
             Assert.That(result, Is.Not.Null);

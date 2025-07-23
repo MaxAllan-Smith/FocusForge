@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FocusForge.Application\FocusForge.Application.csproj" />
     <ProjectReference Include="..\FocusForge.Domain\FocusForge.Domain.csproj" />
   </ItemGroup>
 
