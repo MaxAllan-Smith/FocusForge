@@ -21,12 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UnitTests\Infrastructure\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FocusForge.Application\FocusForge.Application.csproj" />
     <ProjectReference Include="..\FocusForge.Domain\FocusForge.Domain.csproj" />
+    <ProjectReference Include="..\FocusForge.Infrastructure\FocusForge.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
