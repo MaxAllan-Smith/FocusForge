@@ -11,8 +11,8 @@ namespace FocusForge.Tests.UnitTests.Application.Tasks
         [Test]
         public async Task CanMarkTaskAsComplete()
         {
-            InMemoryTaskRepository repo = new InMemoryTaskRepository();
-            TaskItem task = new TaskItem("Write more tests");
+            InMemoryTaskRepository repo = new();
+            TaskItem task = new("Write more tests");
             await repo.AddAsync(task);
 
             CompleteTaskHandler handler = new(repo);

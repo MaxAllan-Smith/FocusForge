@@ -6,44 +6,45 @@ using FocusForge.Infrastructure.Repositories;
 namespace FocusForge.Tests.UnitTests.Application.Tasks
 {
     [TestFixture]
-    public class UpdateTaskTitleHandlerTests
+    public class UpdateTaskTitleHandlerRepoTests
     {
         [Test]
-        public async Task CanUpdateTaskTitle()
+        public async Task CanUpdateTitle_UsingRepository()
         {
-            TaskItem task = new("Old title");
             InMemoryTaskRepository repo = new();
+            TaskItem task = new("Original");
             await repo.AddAsync(task);
 
-            UpdateTaskTitleHandler handler = new(repo);
-            UpdateTaskTitleCommand command = new(task.TaskId, "New title");
+            UpdateTaskTitleHandler handler = new UpdateTaskTitleHandler(repo);
+            UpdateTaskTitleCommand command = new(task.TaskId, "Updated");
 
             await handler.Handle(command);
 
             TaskItem updated = await repo.GetByIdAsync(task.TaskId);
-            Assert.That(updated.Title, Is.EqualTo("New title"));
+            Assert.That(updated.Title, Is.EqualTo("Updated"));
         }
 
         [Test]
-        public void ThrowsIfTaskNotFound()
+        public void ThrowsIfTaskNotFound_UsingRepository()
         {
             InMemoryTaskRepository repo = new();
-            UpdateTaskTitleHandler handler = new(repo);
-            UpdateTaskTitleCommand command = new(Guid.NewGuid(), "Any title");
+            UpdateTaskTitleHandler handler = new UpdateTaskTitleHandler(repo);
+
+            UpdateTaskTitleCommand command = new(Guid.NewGuid(), "Any");
 
             KeyNotFoundException? ex = Assert.ThrowsAsync<KeyNotFoundException>(() => handler.Handle(command));
             Assert.That(ex.Message, Does.Contain("not found"));
         }
 
         [Test]
-        public async Task ThrowsIfNewTitleIsInvalid()
+        public async Task ThrowsIfTitleInvalid_UsingRepository()
         {
-            TaskItem task = new("Initial title");
             InMemoryTaskRepository repo = new();
+            TaskItem task = new("Valid");
             await repo.AddAsync(task);
 
-            UpdateTaskTitleHandler handler = new(repo);
-            UpdateTaskTitleCommand command = new(task.TaskId, " ");
+            UpdateTaskTitleHandler handler = new UpdateTaskTitleHandler(repo);
+            UpdateTaskTitleCommand command = new(task.TaskId, "   ");
 
             ArgumentException? ex = Assert.ThrowsAsync<ArgumentException>(() => handler.Handle(command));
             Assert.That(ex.Message, Does.Contain("Title"));

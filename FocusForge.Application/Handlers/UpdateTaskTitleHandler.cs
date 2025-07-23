@@ -1,16 +1,14 @@
 ﻿using FocusForge.Application.Commands;
+using FocusForge.Application.Interfaces;
 using FocusForge.Domain.Entities;
 
 namespace FocusForge.Application.Handlers
 {
-    public class UpdateTaskTitleHandler(Dictionary<Guid, TaskItem> store)
+    public class UpdateTaskTitleHandler(ITaskRepository taskRepository)
     {
-        public Task Handle(UpdateTaskTitleCommand command)
+        public async Task Handle(UpdateTaskTitleCommand command)
         {
-            if (!store.TryGetValue(command.TaskId, out TaskItem? task))
-            {
-                throw new KeyNotFoundException($"Title with ID {command.TaskId} not found.");
-            }
+            TaskItem task = await taskRepository.GetByIdAsync(command.TaskId);
 
             if (string.IsNullOrWhiteSpace(command.NewTitle))
             {
@@ -18,7 +16,6 @@ namespace FocusForge.Application.Handlers
             }
 
             task.UpdateTitle(command.NewTitle);
-            return Task.CompletedTask;
         }
     }
 }
