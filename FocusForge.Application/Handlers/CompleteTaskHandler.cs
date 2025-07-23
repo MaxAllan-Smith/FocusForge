@@ -1,19 +1,15 @@
 ﻿using FocusForge.Application.Commands;
+using FocusForge.Application.Interfaces;
 using FocusForge.Domain.Entities;
 
 namespace FocusForge.Application.Handlers
 {
-    public class CompleteTaskHandler(Dictionary<Guid, TaskItem> store)
+    public class CompleteTaskHandler(ITaskRepository repository)
     {
-        public Task Handle(CompleteTaskCommand command)
+        public async Task Handle(CompleteTaskCommand command)
         {
-            if (!store.TryGetValue(command.TaskId, out TaskItem? task))
-            {
-                throw new KeyNotFoundException($"Task with ID {command.TaskId} not found.");
-            }
-
+            TaskItem task = await repository.GetByIdAsync(command.TaskId);
             task.MarkComplete();
-            return Task.CompletedTask;
         }
     }
 }
