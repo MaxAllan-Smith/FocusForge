@@ -7,7 +7,7 @@ namespace FocusForge.Application.Handlers
     {
         public Task<TaskItem> Handle(CreateTaskCommand command)
         {
-            TaskItem task = new TaskItem(command.Title);
+            TaskItem task = new(command.Title);
             return Task.FromResult(task);
         }
     }

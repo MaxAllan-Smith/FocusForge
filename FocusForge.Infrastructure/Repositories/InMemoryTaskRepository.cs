@@ -23,5 +23,15 @@ namespace FocusForge.Infrastructure.Repositories
 
             throw new KeyNotFoundException($"Task with ID {id} not found.");
         }
+
+        public Task DeleteAsync(Guid id)
+        {
+            if (!_store.TryRemove(id, out _))
+            {
+                throw new KeyNotFoundException($"Task with ID {id} not found.");
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }

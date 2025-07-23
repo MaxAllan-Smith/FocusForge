@@ -6,5 +6,6 @@ namespace FocusForge.Application.Interfaces
     {
         Task AddAsync(TaskItem task);
         Task<TaskItem> GetByIdAsync(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }
